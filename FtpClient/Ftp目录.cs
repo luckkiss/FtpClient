@@ -1,5 +1,4 @@
 ﻿using BingYing;
-using Common;
 using FtpModel;
 using System;
 using System.Collections.Generic;
