@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(发布管理器));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.项目名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.排序号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IpAddr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WebDir = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocalDir = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DomainName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.查看FtpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.增量发布ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,15 +60,9 @@
             this.清空更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new FtpClient.MyListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.项目名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.排序号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IpAddr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WebDir = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LocalDir = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DomainName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_增量发布 = new System.Windows.Forms.Button();
+            this.cb_项目 = new System.Windows.Forms.ComboBox();
+            this.btn_完整发布 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -86,7 +89,7 @@
             this.WebDir,
             this.LocalDir,
             this.DomainName});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 83);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 96);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -94,10 +97,92 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(227, 716);
+            this.dataGridView1.Size = new System.Drawing.Size(227, 703);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // 项目名称
+            // 
+            this.项目名称.DataPropertyName = "Name";
+            this.项目名称.FillWeight = 125.1337F;
+            this.项目名称.HeaderText = "项目名称";
+            this.项目名称.MinimumWidth = 6;
+            this.项目名称.Name = "项目名称";
+            this.项目名称.ReadOnly = true;
+            // 
+            // 排序号
+            // 
+            this.排序号.DataPropertyName = "Pxh";
+            this.排序号.FillWeight = 74.86631F;
+            this.排序号.HeaderText = "排序号";
+            this.排序号.MinimumWidth = 6;
+            this.排序号.Name = "排序号";
+            this.排序号.ReadOnly = true;
+            this.排序号.Visible = false;
+            // 
+            // IpAddr
+            // 
+            this.IpAddr.DataPropertyName = "IpAddr";
+            this.IpAddr.HeaderText = "地址";
+            this.IpAddr.MinimumWidth = 6;
+            this.IpAddr.Name = "IpAddr";
+            this.IpAddr.ReadOnly = true;
+            this.IpAddr.Visible = false;
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "账号";
+            this.UserName.MinimumWidth = 6;
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Visible = false;
+            // 
+            // Password
+            // 
+            this.Password.DataPropertyName = "Password";
+            this.Password.HeaderText = "密码";
+            this.Password.MinimumWidth = 6;
+            this.Password.Name = "Password";
+            this.Password.ReadOnly = true;
+            this.Password.Visible = false;
+            // 
+            // WebDir
+            // 
+            this.WebDir.DataPropertyName = "WebDir";
+            this.WebDir.HeaderText = "远程目录";
+            this.WebDir.MinimumWidth = 6;
+            this.WebDir.Name = "WebDir";
+            this.WebDir.ReadOnly = true;
+            this.WebDir.Visible = false;
+            // 
+            // LocalDir
+            // 
+            this.LocalDir.DataPropertyName = "LocalDir";
+            this.LocalDir.HeaderText = "本地目录";
+            this.LocalDir.MinimumWidth = 6;
+            this.LocalDir.Name = "LocalDir";
+            this.LocalDir.ReadOnly = true;
+            this.LocalDir.Visible = false;
+            // 
+            // DomainName
+            // 
+            this.DomainName.DataPropertyName = "DomainName";
+            this.DomainName.HeaderText = "域名";
+            this.DomainName.MinimumWidth = 6;
+            this.DomainName.Name = "DomainName";
+            this.DomainName.ReadOnly = true;
+            this.DomainName.Visible = false;
             // 
             // contextMenuStrip1
             // 
@@ -203,7 +288,7 @@
             this.日志ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1485, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1485, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -213,20 +298,20 @@
             this.新增项目ToolStripMenuItem,
             this.显示排序号ToolStripMenuItem});
             this.项目ToolStripMenuItem.Name = "项目ToolStripMenuItem";
-            this.项目ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.项目ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.项目ToolStripMenuItem.Text = "项目";
             // 
             // 新增项目ToolStripMenuItem
             // 
             this.新增项目ToolStripMenuItem.Name = "新增项目ToolStripMenuItem";
-            this.新增项目ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.新增项目ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.新增项目ToolStripMenuItem.Text = "新建项目";
             this.新增项目ToolStripMenuItem.Click += new System.EventHandler(this.新增项目ToolStripMenuItem_Click);
             // 
             // 显示排序号ToolStripMenuItem
             // 
             this.显示排序号ToolStripMenuItem.Name = "显示排序号ToolStripMenuItem";
-            this.显示排序号ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.显示排序号ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.显示排序号ToolStripMenuItem.Text = "显示排序号";
             this.显示排序号ToolStripMenuItem.Click += new System.EventHandler(this.显示排序号ToolStripMenuItem_Click);
             // 
@@ -235,7 +320,7 @@
             this.日志ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.清空更新日志ToolStripMenuItem});
             this.日志ToolStripMenuItem.Name = "日志ToolStripMenuItem";
-            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.日志ToolStripMenuItem.Text = "日志";
             // 
             // 清空更新日志ToolStripMenuItem
@@ -255,10 +340,10 @@
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(248, 83);
+            this.listView1.Location = new System.Drawing.Point(248, 96);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1228, 716);
+            this.listView1.Size = new System.Drawing.Size(1228, 703);
             this.listView1.TabIndex = 13;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -268,87 +353,36 @@
             this.columnHeader1.Text = "更新日志";
             this.columnHeader1.Width = 750;
             // 
-            // Id
+            // btn_增量发布
             // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
+            this.btn_增量发布.Location = new System.Drawing.Point(248, 43);
+            this.btn_增量发布.Name = "btn_增量发布";
+            this.btn_增量发布.Size = new System.Drawing.Size(90, 35);
+            this.btn_增量发布.TabIndex = 15;
+            this.btn_增量发布.Text = "增量发布";
+            this.btn_增量发布.UseVisualStyleBackColor = true;
+            this.btn_增量发布.Click += new System.EventHandler(this.btn_增量发布_Click);
             // 
-            // 项目名称
+            // cb_项目
             // 
-            this.项目名称.DataPropertyName = "Name";
-            this.项目名称.FillWeight = 125.1337F;
-            this.项目名称.HeaderText = "项目名称";
-            this.项目名称.MinimumWidth = 6;
-            this.项目名称.Name = "项目名称";
-            this.项目名称.ReadOnly = true;
+            this.cb_项目.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_项目.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cb_项目.FormattingEnabled = true;
+            this.cb_项目.Location = new System.Drawing.Point(12, 47);
+            this.cb_项目.Name = "cb_项目";
+            this.cb_项目.Size = new System.Drawing.Size(227, 26);
+            this.cb_项目.TabIndex = 16;
+            this.cb_项目.SelectedIndexChanged += new System.EventHandler(this.cb_项目_SelectedIndexChanged);
             // 
-            // 排序号
+            // btn_完整发布
             // 
-            this.排序号.DataPropertyName = "Pxh";
-            this.排序号.FillWeight = 74.86631F;
-            this.排序号.HeaderText = "排序号";
-            this.排序号.MinimumWidth = 6;
-            this.排序号.Name = "排序号";
-            this.排序号.ReadOnly = true;
-            this.排序号.Visible = false;
-            // 
-            // IpAddr
-            // 
-            this.IpAddr.DataPropertyName = "IpAddr";
-            this.IpAddr.HeaderText = "地址";
-            this.IpAddr.MinimumWidth = 6;
-            this.IpAddr.Name = "IpAddr";
-            this.IpAddr.ReadOnly = true;
-            this.IpAddr.Visible = false;
-            // 
-            // UserName
-            // 
-            this.UserName.DataPropertyName = "UserName";
-            this.UserName.HeaderText = "账号";
-            this.UserName.MinimumWidth = 6;
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Visible = false;
-            // 
-            // Password
-            // 
-            this.Password.DataPropertyName = "Password";
-            this.Password.HeaderText = "密码";
-            this.Password.MinimumWidth = 6;
-            this.Password.Name = "Password";
-            this.Password.ReadOnly = true;
-            this.Password.Visible = false;
-            // 
-            // WebDir
-            // 
-            this.WebDir.DataPropertyName = "WebDir";
-            this.WebDir.HeaderText = "远程目录";
-            this.WebDir.MinimumWidth = 6;
-            this.WebDir.Name = "WebDir";
-            this.WebDir.ReadOnly = true;
-            this.WebDir.Visible = false;
-            // 
-            // LocalDir
-            // 
-            this.LocalDir.DataPropertyName = "LocalDir";
-            this.LocalDir.HeaderText = "本地目录";
-            this.LocalDir.MinimumWidth = 6;
-            this.LocalDir.Name = "LocalDir";
-            this.LocalDir.ReadOnly = true;
-            this.LocalDir.Visible = false;
-            // 
-            // DomainName
-            // 
-            this.DomainName.DataPropertyName = "DomainName";
-            this.DomainName.HeaderText = "域名";
-            this.DomainName.MinimumWidth = 6;
-            this.DomainName.Name = "DomainName";
-            this.DomainName.ReadOnly = true;
-            this.DomainName.Visible = false;
+            this.btn_完整发布.Location = new System.Drawing.Point(352, 43);
+            this.btn_完整发布.Name = "btn_完整发布";
+            this.btn_完整发布.Size = new System.Drawing.Size(90, 35);
+            this.btn_完整发布.TabIndex = 17;
+            this.btn_完整发布.Text = "完整发布";
+            this.btn_完整发布.UseVisualStyleBackColor = true;
+            this.btn_完整发布.Click += new System.EventHandler(this.btn_完整发布_Click);
             // 
             // 发布管理器
             // 
@@ -356,6 +390,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1485, 826);
+            this.Controls.Add(this.btn_完整发布);
+            this.Controls.Add(this.cb_项目);
+            this.Controls.Add(this.btn_增量发布);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -408,6 +445,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn WebDir;
         private System.Windows.Forms.DataGridViewTextBoxColumn LocalDir;
         private System.Windows.Forms.DataGridViewTextBoxColumn DomainName;
+        private System.Windows.Forms.Button btn_增量发布;
+        private System.Windows.Forms.ComboBox cb_项目;
+        private System.Windows.Forms.Button btn_完整发布;
     }
 }
 

@@ -20,18 +20,28 @@ namespace FtpClient
         }
         private MyFtpHelper ftpHelper = null;
         private List<Project> projectList = null;
-
+        private IniFile ini;
         #region 匿名委托 
         public void ThreadUpdateListView(string msg)
         {
             this.BeginInvoke(new EventHandler(delegate { this.listView1.Items.Insert(0, new ListViewItem(msg)); }));
         }
-       
+
         #endregion
 
         private void Main_Load(object sender, EventArgs e)
-        {          
+        {
             Chaxun();
+            var iniPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fbq.ini");
+            ini = new IniFile(iniPath);
+            try
+            {
+                var value = Convert.ToInt64(ini.ReadInivalue("cb_项目"));
+                cb_项目.SelectedItem = projectList.FirstOrDefault(u => u.Id == value);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -78,6 +88,9 @@ namespace FtpClient
             projectList = PubDal.projectDal.GetList().OrderBy(u => u.Pxh).ToList();
             this.dataGridView1.DataSource = projectList;
             dataGridView1.ClearSelection();
+            projectList.ForEach(u => cb_项目.Items.Add(u));
+            cb_项目.ValueMember = "Id";
+            cb_项目.DisplayMember = "Name";
         }
 
 
@@ -109,10 +122,7 @@ namespace FtpClient
             return projectList.FirstOrDefault(u => u.Id == getValueId());
         }
 
-        private void 完整发布ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Publish(PublishTypeEnum.完整发布);
-        }
+       
 
         /// <summary>
         /// 获取本地文件
@@ -144,9 +154,9 @@ namespace FtpClient
         /// 发布
         /// </summary>
         /// <param name="type"></param>
-        private void Publish(PublishTypeEnum type)
+        private void Publish(PublishTypeEnum type, Project model = null)
         {
-            var model = GetFirstOrDefault();
+            if (model == null) model = GetFirstOrDefault();
             ftpHelper = new MyFtpHelper(model);
             ftpHelper.RelatePath = string.Format("{0}/{1}", ftpHelper.RelatePath, model.Name);
             var localFiles = GetLocalFiles(model);
@@ -163,7 +173,7 @@ namespace FtpClient
                         完整发布(localFiles, model);
                         break;
                     case PublishTypeEnum.完整发布Views:
-                        localFiles=localFiles.Where(u => u.Contains("\\Views\\")).ToList();
+                        localFiles = localFiles.Where(u => u.Contains("\\Views\\")).ToList();
                         完整发布(localFiles, model);
                         break;
                     case PublishTypeEnum.增量发布:
@@ -179,11 +189,11 @@ namespace FtpClient
                 ThreadUpdateListView(DateTime.Now + ":发布完成");
             }));
             Thread.Start();
-        } 
+        }
 
         private void 增量发布虚拟(List<string> files, Project model)
         {
-            ThreadUpdateListView("增量发布虚拟");
+            ThreadUpdateListView(model.Name + "增量发布虚拟");
             foreach (var item in files)
             {
                 var filehash = PubDal.filehashDal.GetModel(item, model.Id);
@@ -213,7 +223,7 @@ namespace FtpClient
         /// <param name="model"></param>
         private void 完整发布虚拟(List<string> files, Project model)
         {
-            ThreadUpdateListView("完整发布虚拟");
+            ThreadUpdateListView(model.Name + "完整发布虚拟");
             foreach (var item in files)
             {
                 var filehash = PubDal.filehashDal.GetModel(item, model.Id); ;
@@ -244,7 +254,7 @@ namespace FtpClient
         /// <param name="model"></param>
         private void 完整发布(List<string> files, Project model)
         {
-            ThreadUpdateListView("完整发布");
+            ThreadUpdateListView(model.Name + "完整发布");
             foreach (var item in files)
             {
                 bool isOk;
@@ -277,7 +287,7 @@ namespace FtpClient
         /// <param name="model"></param>
         private void 增量发布(List<string> files, Project model)
         {
-            ThreadUpdateListView("增量发布");
+            ThreadUpdateListView(model.Name + "增量发布");
             foreach (var item in files)
             {
                 bool isOk;
@@ -369,7 +379,7 @@ namespace FtpClient
 
         private void 获取文件配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
         }
         private void 显示排序号ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -391,6 +401,35 @@ namespace FtpClient
         private void 完整发布ViewsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Publish(PublishTypeEnum.完整发布Views);
+        }
+
+        private void btn_增量发布_Click(object sender, EventArgs e)
+        {
+            Publish(PublishTypeEnum.增量发布, cb_项目.SelectedItem as Project);
+        }
+
+        private void cb_项目_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ini.WriteInivalue("cb_项目", ((Project)cb_项目.SelectedItem).Id);
+        }
+
+        private void btn_完整发布_Click(object sender, EventArgs e)
+        {          
+            ShowDialogAll(cb_项目.SelectedItem as Project);
+        }
+
+        private void 完整发布ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDialogAll(GetFirstOrDefault());            
+        }
+        /// <summary>
+        /// 完整发布确认对话框
+        /// </summary>
+        /// <param name="model"></param>
+        private void ShowDialogAll(Project model)
+        {
+            var dr = MessageBox.Show("完整发布耗时较多,确定完整发布？" + model.Name, "完整发布", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (dr == DialogResult.OK) Publish(PublishTypeEnum.完整发布, model);
         }
     }
 }

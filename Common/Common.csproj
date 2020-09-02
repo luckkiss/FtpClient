@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="FtpHelper.cs" />
     <Compile Include="HashHelper.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
