@@ -24,7 +24,7 @@ namespace FtpClient
         #region 匿名委托 
         public void ThreadUpdateListView(string msg)
         {
-            this.BeginInvoke(new EventHandler(delegate { this.listView1.Items.Insert(0, new ListViewItem(msg)); }));
+            this.BeginInvoke(new EventHandler(delegate { this.listView1.Items.Insert(0, new ListViewItem(msg.Replace("//","/"))); }));
         }
 
         #endregion
@@ -329,7 +329,7 @@ namespace FtpClient
         private void EditProject()
         {
             var fm = new 项目配置();
-            fm.Id = getValueId();
+            fm.model = PubDal.projectDal.GetModel(getValueId());
             fm.ShowDialog();
             if (fm.DialogResult == DialogResult.OK)
                 Chaxun();

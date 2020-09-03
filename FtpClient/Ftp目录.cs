@@ -27,19 +27,28 @@ namespace FtpClient
         /// </summary>        
         public void ThreadUpdateListView()
         {
-            this.BeginInvoke(new EventHandler(delegate { this.ShowList(); }));
+            try
+            {
+                this.BeginInvoke(new EventHandler(delegate { this.ShowList(); }));
+            }
+            catch (Exception)
+            {
+
+               
+            }
+          
         }
 
         #endregion     
 
         private void Ftp目录_Load(object sender, EventArgs e)
-        {          
+        {
             ftpHelper = new MyFtpHelper(model);
-            if (!model.WebDir.IsNullOrEmpty())
+            if (!model.WebDir.IsNullOrEmpty() && model.WebDir != "/")
                 ftpHelper.RelatePath = ftpHelper.RelatePath + "/" + model.Name;
             this.ListDirectory();
             this.Text = model.Name;
-            tb_WebDir.Text = ftpHelper.RelatePath;          
+            tb_WebDir.Text = ftpHelper.RelatePath;
         }
 
 
