@@ -18,6 +18,11 @@ namespace Common
         {
             filePath = INIPath;
         }
+
+        public void WriteInivalue(string Key, bool value)
+        {
+            WriteInivalue(Key, value?"1":"0");
+        }
         public void WriteInivalue(string Key, long value)
         {
             WriteInivalue(Key, value.ToString());

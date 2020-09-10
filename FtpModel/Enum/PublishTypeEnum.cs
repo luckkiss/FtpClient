@@ -29,18 +29,6 @@ namespace FtpModel
         /// 增量发布虚拟
         /// </summary>
         [Description("增量发布虚拟")]
-        增量发布虚拟 = 3,
-
-        /// <summary>
-        /// 完整发布bin
-        /// </summary>
-        [Description("完整发布bin")]
-        完整发布bin = 4,
-
-        /// <summary>
-        /// 完整发布Views
-        /// </summary>
-        [Description("完整发布Views")]
-        完整发布Views = 5,
+        增量发布虚拟 = 3,        
     }
 }

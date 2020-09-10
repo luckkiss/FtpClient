@@ -45,8 +45,6 @@
             this.增量发布ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.增量发布虚拟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.完整发布ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.完整发布binToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.完整发布ViewsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.新建项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,14 +56,20 @@
             this.显示排序号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空更新日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView1 = new FtpClient.MyListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_增量发布 = new System.Windows.Forms.Button();
             this.cb_项目 = new System.Windows.Forms.ComboBox();
             this.btn_完整发布 = new System.Windows.Forms.Button();
+            this.cb_root = new System.Windows.Forms.CheckBox();
+            this.cb_scripts = new System.Windows.Forms.CheckBox();
+            this.cb_views = new System.Windows.Forms.CheckBox();
+            this.cb_bin = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new FtpClient.MyListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -192,14 +196,12 @@
             this.增量发布ToolStripMenuItem,
             this.增量发布虚拟ToolStripMenuItem,
             this.完整发布ToolStripMenuItem,
-            this.完整发布binToolStripMenuItem,
-            this.完整发布ViewsToolStripMenuItem1,
             this.新建项目ToolStripMenuItem,
             this.编辑项目ToolStripMenuItem,
             this.删除项目ToolStripMenuItem,
             this.资源管理器中打开文件夹ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 244);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(244, 224);
             // 
             // 查看FtpToolStripMenuItem
             // 
@@ -228,20 +230,6 @@
             this.完整发布ToolStripMenuItem.Size = new System.Drawing.Size(243, 24);
             this.完整发布ToolStripMenuItem.Text = "完整发布";
             this.完整发布ToolStripMenuItem.Click += new System.EventHandler(this.完整发布ToolStripMenuItem_Click);
-            // 
-            // 完整发布binToolStripMenuItem
-            // 
-            this.完整发布binToolStripMenuItem.Name = "完整发布binToolStripMenuItem";
-            this.完整发布binToolStripMenuItem.Size = new System.Drawing.Size(243, 24);
-            this.完整发布binToolStripMenuItem.Text = "完整发布bin";
-            this.完整发布binToolStripMenuItem.Click += new System.EventHandler(this.完整发布binToolStripMenuItem_Click);
-            // 
-            // 完整发布ViewsToolStripMenuItem1
-            // 
-            this.完整发布ViewsToolStripMenuItem1.Name = "完整发布ViewsToolStripMenuItem1";
-            this.完整发布ViewsToolStripMenuItem1.Size = new System.Drawing.Size(243, 24);
-            this.完整发布ViewsToolStripMenuItem1.Text = "完整发布Views";
-            this.完整发布ViewsToolStripMenuItem1.Click += new System.EventHandler(this.完整发布ViewsToolStripMenuItem1_Click);
             // 
             // 新建项目ToolStripMenuItem
             // 
@@ -288,7 +276,7 @@
             this.日志ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1485, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1485, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -298,7 +286,7 @@
             this.新增项目ToolStripMenuItem,
             this.显示排序号ToolStripMenuItem});
             this.项目ToolStripMenuItem.Name = "项目ToolStripMenuItem";
-            this.项目ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.项目ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.项目ToolStripMenuItem.Text = "项目";
             // 
             // 新增项目ToolStripMenuItem
@@ -320,7 +308,7 @@
             this.日志ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.清空更新日志ToolStripMenuItem});
             this.日志ToolStripMenuItem.Name = "日志ToolStripMenuItem";
-            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.日志ToolStripMenuItem.Text = "日志";
             // 
             // 清空更新日志ToolStripMenuItem
@@ -329,6 +317,95 @@
             this.清空更新日志ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.清空更新日志ToolStripMenuItem.Text = "清空更新日志";
             this.清空更新日志ToolStripMenuItem.Click += new System.EventHandler(this.清空更新日志ToolStripMenuItem_Click);
+            // 
+            // btn_增量发布
+            // 
+            this.btn_增量发布.Location = new System.Drawing.Point(7, 15);
+            this.btn_增量发布.Name = "btn_增量发布";
+            this.btn_增量发布.Size = new System.Drawing.Size(90, 35);
+            this.btn_增量发布.TabIndex = 15;
+            this.btn_增量发布.Text = "增量发布";
+            this.btn_增量发布.UseVisualStyleBackColor = true;
+            this.btn_增量发布.Click += new System.EventHandler(this.btn_增量发布_Click);
+            // 
+            // cb_项目
+            // 
+            this.cb_项目.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_项目.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cb_项目.FormattingEnabled = true;
+            this.cb_项目.Location = new System.Drawing.Point(12, 47);
+            this.cb_项目.Name = "cb_项目";
+            this.cb_项目.Size = new System.Drawing.Size(227, 26);
+            this.cb_项目.TabIndex = 16;
+            this.cb_项目.SelectedIndexChanged += new System.EventHandler(this.cb_项目_SelectedIndexChanged);
+            // 
+            // btn_完整发布
+            // 
+            this.btn_完整发布.Location = new System.Drawing.Point(106, 15);
+            this.btn_完整发布.Name = "btn_完整发布";
+            this.btn_完整发布.Size = new System.Drawing.Size(90, 35);
+            this.btn_完整发布.TabIndex = 17;
+            this.btn_完整发布.Text = "完整发布";
+            this.btn_完整发布.UseVisualStyleBackColor = true;
+            this.btn_完整发布.Click += new System.EventHandler(this.btn_完整发布_Click);
+            // 
+            // cb_root
+            // 
+            this.cb_root.AutoSize = true;
+            this.cb_root.Location = new System.Drawing.Point(231, 23);
+            this.cb_root.Name = "cb_root";
+            this.cb_root.Size = new System.Drawing.Size(61, 19);
+            this.cb_root.TabIndex = 18;
+            this.cb_root.Text = "root";
+            this.cb_root.UseVisualStyleBackColor = true;
+            this.cb_root.CheckedChanged += new System.EventHandler(this.cb_root_CheckedChanged);
+            // 
+            // cb_scripts
+            // 
+            this.cb_scripts.AutoSize = true;
+            this.cb_scripts.Location = new System.Drawing.Point(450, 23);
+            this.cb_scripts.Name = "cb_scripts";
+            this.cb_scripts.Size = new System.Drawing.Size(85, 19);
+            this.cb_scripts.TabIndex = 19;
+            this.cb_scripts.Text = "scripts";
+            this.cb_scripts.UseVisualStyleBackColor = true;
+            this.cb_scripts.CheckedChanged += new System.EventHandler(this.cb_scripts_CheckedChanged);
+            // 
+            // cb_views
+            // 
+            this.cb_views.AutoSize = true;
+            this.cb_views.Location = new System.Drawing.Point(369, 23);
+            this.cb_views.Name = "cb_views";
+            this.cb_views.Size = new System.Drawing.Size(69, 19);
+            this.cb_views.TabIndex = 20;
+            this.cb_views.Text = "views";
+            this.cb_views.UseVisualStyleBackColor = true;
+            this.cb_views.CheckedChanged += new System.EventHandler(this.cb_views_CheckedChanged);
+            // 
+            // cb_bin
+            // 
+            this.cb_bin.AutoSize = true;
+            this.cb_bin.Location = new System.Drawing.Point(304, 23);
+            this.cb_bin.Name = "cb_bin";
+            this.cb_bin.Size = new System.Drawing.Size(53, 19);
+            this.cb_bin.TabIndex = 21;
+            this.cb_bin.Text = "bin";
+            this.cb_bin.UseVisualStyleBackColor = true;
+            this.cb_bin.CheckedChanged += new System.EventHandler(this.cb_bin_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btn_完整发布);
+            this.groupBox1.Controls.Add(this.cb_root);
+            this.groupBox1.Controls.Add(this.cb_bin);
+            this.groupBox1.Controls.Add(this.cb_scripts);
+            this.groupBox1.Controls.Add(this.btn_增量发布);
+            this.groupBox1.Controls.Add(this.cb_views);
+            this.groupBox1.Location = new System.Drawing.Point(248, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(556, 56);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
             // 
             // listView1
             // 
@@ -353,46 +430,14 @@
             this.columnHeader1.Text = "更新日志";
             this.columnHeader1.Width = 750;
             // 
-            // btn_增量发布
-            // 
-            this.btn_增量发布.Location = new System.Drawing.Point(248, 43);
-            this.btn_增量发布.Name = "btn_增量发布";
-            this.btn_增量发布.Size = new System.Drawing.Size(90, 35);
-            this.btn_增量发布.TabIndex = 15;
-            this.btn_增量发布.Text = "增量发布";
-            this.btn_增量发布.UseVisualStyleBackColor = true;
-            this.btn_增量发布.Click += new System.EventHandler(this.btn_增量发布_Click);
-            // 
-            // cb_项目
-            // 
-            this.cb_项目.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_项目.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cb_项目.FormattingEnabled = true;
-            this.cb_项目.Location = new System.Drawing.Point(12, 47);
-            this.cb_项目.Name = "cb_项目";
-            this.cb_项目.Size = new System.Drawing.Size(227, 26);
-            this.cb_项目.TabIndex = 16;
-            this.cb_项目.SelectedIndexChanged += new System.EventHandler(this.cb_项目_SelectedIndexChanged);
-            // 
-            // btn_完整发布
-            // 
-            this.btn_完整发布.Location = new System.Drawing.Point(352, 43);
-            this.btn_完整发布.Name = "btn_完整发布";
-            this.btn_完整发布.Size = new System.Drawing.Size(90, 35);
-            this.btn_完整发布.TabIndex = 17;
-            this.btn_完整发布.Text = "完整发布";
-            this.btn_完整发布.UseVisualStyleBackColor = true;
-            this.btn_完整发布.Click += new System.EventHandler(this.btn_完整发布_Click);
-            // 
             // 发布管理器
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1485, 826);
-            this.Controls.Add(this.btn_完整发布);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cb_项目);
-            this.Controls.Add(this.btn_增量发布);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -408,6 +453,8 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,8 +481,6 @@
         private System.Windows.Forms.ToolStripMenuItem 清空更新日志ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 显示排序号ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 资源管理器中打开文件夹ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 完整发布binToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 完整发布ViewsToolStripMenuItem1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn 项目名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 排序号;
@@ -448,6 +493,11 @@
         private System.Windows.Forms.Button btn_增量发布;
         private System.Windows.Forms.ComboBox cb_项目;
         private System.Windows.Forms.Button btn_完整发布;
+        private System.Windows.Forms.CheckBox cb_root;
+        private System.Windows.Forms.CheckBox cb_scripts;
+        private System.Windows.Forms.CheckBox cb_views;
+        private System.Windows.Forms.CheckBox cb_bin;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

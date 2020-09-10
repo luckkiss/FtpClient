@@ -36,12 +36,22 @@ namespace FtpClient
             ini = new IniFile(iniPath);
             try
             {
+                cb_bin.Checked = ReadInivalue("cb_bin");
+                cb_root.Checked = ReadInivalue("cb_root"); 
+                cb_scripts.Checked = ReadInivalue("cb_scripts"); 
+                cb_views.Checked = ReadInivalue("cb_views"); 
                 var value = Convert.ToInt64(ini.ReadInivalue("cb_项目"));
                 cb_项目.SelectedItem = projectList.FirstOrDefault(u => u.Id == value);
             }
             catch (Exception)
             {
             }
+        }
+
+
+        private bool ReadInivalue(string Key)
+        {
+            return ini.ReadInivalue(Key) == "1"; 
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -122,7 +132,7 @@ namespace FtpClient
             return projectList.FirstOrDefault(u => u.Id == getValueId());
         }
 
-       
+
 
         /// <summary>
         /// 获取本地文件
@@ -132,21 +142,33 @@ namespace FtpClient
         public List<string> GetLocalFiles(Project model)
         {
             List<string> files = new List<string>();
-            var rootfiles = Directory.GetFiles(model.LocalDir, "*.*"); //根目录文件
-            foreach (var item in rootfiles)
+            if (cb_root.Checked)
             {
-                if (item.EndsWith(".csproj") || item.EndsWith(".user")) continue;
-                else files.Add(item);
+                var rootfiles = Directory.GetFiles(model.LocalDir, "*.*"); //根目录文件
+                foreach (var item in rootfiles)
+                {
+                    if (item.EndsWith(".csproj") || item.EndsWith(".user")) continue;
+                    else files.Add(item);
+                }
             }
-            var scriptsPath = Path.Combine(model.LocalDir, "Scripts");
-            if (Directory.Exists(scriptsPath))
-                files.AddRange(Directory.GetFiles(scriptsPath, "*.*", SearchOption.AllDirectories));//Script目录文件
-            var viewsPath = Path.Combine(model.LocalDir, "Views");
-            if (Directory.Exists(viewsPath))
-                files.AddRange(Directory.GetFiles(viewsPath, "*.*", SearchOption.AllDirectories));//Views目录文件
-            var binPath = Path.Combine(model.LocalDir, "bin");
-            if (Directory.Exists(binPath))
-                files.AddRange(Directory.GetFiles(binPath, "*.dll"));//bin目录文件
+            if (cb_scripts.Checked)
+            {
+                var scriptsPath = Path.Combine(model.LocalDir, "Scripts");
+                if (Directory.Exists(scriptsPath))
+                    files.AddRange(Directory.GetFiles(scriptsPath, "*.*", SearchOption.AllDirectories));//Script目录文件
+            }
+            if (cb_views.Checked)
+            {
+                var viewsPath = Path.Combine(model.LocalDir, "Views");
+                if (Directory.Exists(viewsPath))
+                    files.AddRange(Directory.GetFiles(viewsPath, "*.*", SearchOption.AllDirectories));//Views目录文件
+            }
+            if (cb_bin.Checked)
+            {
+                var binPath = Path.Combine(model.LocalDir, "bin");
+                if (Directory.Exists(binPath))
+                    files.AddRange(Directory.GetFiles(binPath, "*.dll"));//bin目录文件
+            }
             return files;
         }
 
@@ -167,15 +189,7 @@ namespace FtpClient
                 {
                     case PublishTypeEnum.完整发布:
                         完整发布(localFiles, model);
-                        break;
-                    case PublishTypeEnum.完整发布bin:
-                        localFiles = localFiles.Where(u => u.Contains("\\bin\\")).ToList();
-                        完整发布(localFiles, model);
-                        break;
-                    case PublishTypeEnum.完整发布Views:
-                        localFiles = localFiles.Where(u => u.Contains("\\Views\\")).ToList();
-                        完整发布(localFiles, model);
-                        break;
+                        break; 
                     case PublishTypeEnum.增量发布:
                         增量发布(localFiles, model);
                         break;
@@ -395,12 +409,12 @@ namespace FtpClient
 
         private void 完整发布binToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Publish(PublishTypeEnum.完整发布bin);
+          
         }
 
         private void 完整发布ViewsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Publish(PublishTypeEnum.完整发布Views);
+          
         }
 
         private void btn_增量发布_Click(object sender, EventArgs e)
@@ -430,6 +444,26 @@ namespace FtpClient
         {
             var dr = MessageBox.Show("完整发布耗时较多,确定完整发布？" + model.Name, "完整发布", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (dr == DialogResult.OK) Publish(PublishTypeEnum.完整发布, model);
+        }
+
+        private void cb_root_CheckedChanged(object sender, EventArgs e)
+        {
+            ini.WriteInivalue("cb_root", cb_root.Checked);
+        }
+
+        private void cb_scripts_CheckedChanged(object sender, EventArgs e)
+        {
+            ini.WriteInivalue("cb_scripts", cb_scripts.Checked);
+        }
+
+        private void cb_views_CheckedChanged(object sender, EventArgs e)
+        {
+            ini.WriteInivalue("cb_views", cb_views.Checked);
+        }
+
+        private void cb_bin_CheckedChanged(object sender, EventArgs e)
+        {
+            ini.WriteInivalue("cb_bin", cb_bin.Checked);
         }
     }
 }
